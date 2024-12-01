@@ -5,7 +5,10 @@ mod constants;
 use helpers::{reader::read_file_data, transformers::parse_data, helpers::value_sort, helpers::count};
 
 fn main() {
+        // Input data
         let data = read_file_data("../data/input.txt");
+
+        // Part One Solution
         if let Some(parsed_data) = parse_data(&data) {
             let sorted_data = value_sort(&parsed_data);
             let mut answer = 0;
@@ -17,7 +20,7 @@ fn main() {
             println!("Part One: {}", answer);
         }
 
-        let data = read_file_data("../data/input.txt");
+        // Part Two Solution
         if let Some(parsed_data) = parse_data(&data) {
             let mut answer = 0;
 
