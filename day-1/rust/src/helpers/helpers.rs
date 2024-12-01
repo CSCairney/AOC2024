@@ -28,3 +28,13 @@ pub fn value_sort(data: &[InputPair]) -> Vec<InputPair> {
     sorted
 }
 
+pub fn count(data: &[InputPair], target: i32) -> usize {
+    let occurrence = data.iter().filter(|&value| value.value_two == target).count();
+
+    if DEV_MODE {
+        println!("Target: {}, occurrence: {}", target, occurrence);
+    }
+
+    occurrence
+}
+
