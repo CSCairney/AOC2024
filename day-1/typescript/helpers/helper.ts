@@ -30,3 +30,13 @@ export const valueSort = (data: InputPair[]): InputPair[] => {
     return sorted;
 };
 
+export const count = (data: InputPair[], target: number): number => {
+    const occurrence = data.filter((value) => value.valueTwo === target).length;
+
+    if (devMode) {
+        console.log("Target: " + target + ", occurrence: " + occurrence);
+    }
+    return occurrence;
+};
+
+

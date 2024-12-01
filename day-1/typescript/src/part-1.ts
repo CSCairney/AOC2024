@@ -13,5 +13,5 @@ if (parsedData) {
         answer += Math.abs(value.valueOne - value.valueTwo);
     });
 
-    console.log("Total: ", answer);
+    console.log("Part One: ", answer);
 }
