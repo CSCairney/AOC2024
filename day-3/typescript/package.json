@@ -1,15 +1,14 @@
 {
-  "name": "typescript",
+  "name": "day-3",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Day 3 of advent of code",
+  "main": "part-1.ts",
   "scripts": {
     "test": "npx ts-node tests/tests.ts",
     "start-p1": "npx ts-node src/part-1.ts",
     "start-p2": "npx ts-node src/part-2.ts"
   },
-  "keywords": [],
-  "author": "",
+  "author": "Charles Cairney",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
