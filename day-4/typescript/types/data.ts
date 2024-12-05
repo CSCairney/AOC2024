@@ -1,1 +1,1 @@
-export type Direction = { dx: number; dy: number };
+export type Direction = {name: string; dx: number; dy: number };
