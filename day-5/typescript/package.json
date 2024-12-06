@@ -1,0 +1,19 @@
+{
+  "name": "day-5",
+  "version": "1.0.0",
+  "description": "Day 5 of advent of code",
+  "main": "part-1.ts",
+  "scripts": {
+    "test": "npx ts-node tests/tests.ts",
+    "start-p1": "npx ts-node src/part-1.ts",
+    "start-p2": "npx ts-node src/part-2.ts"
+  },
+  "author": "Charles Cairney",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@types/node": "^22.10.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
+  }
+}
