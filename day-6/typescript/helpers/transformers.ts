@@ -47,34 +47,64 @@ function findGuard(data: string[][]): Position | undefined {
     return undefined;
 }
 
-export function calculatePathCount(data: string[][]): number {
-    const initialGuardPosition = findGuard(data);
+function simulateWithExtraObstacle(
+    data: string[][],
+    obstaclePos: Position,
+    guardStart: Position
+): boolean {
+    const mapCopy = data.map((row) => [...row]);
 
-    if (!initialGuardPosition) {
-        throw new Error("Guard's initial position not found.");
-    }
+    mapCopy[obstaclePos.x][obstaclePos.y] = "#";
 
-    const visitedPositions = new Set<string>();
     let direction: Direction = "UP";
-    let currentPosition: Position = initialGuardPosition;
+    let currentPosition = { ...guardStart };
 
-    visitedPositions.add(`${currentPosition.x},${currentPosition.y}`);
+    const DejaVu = new Set<string>();
 
     while (true) {
+        const jediMindTricksLocation = `${currentPosition.x},${currentPosition.y},${direction}`;
+
+        if (DejaVu.has(jediMindTricksLocation)) {
+            return true;
+        }
+        DejaVu.add(jediMindTricksLocation);
+
         const forwardPosition = moveGuard(currentPosition, direction);
 
-        if (isOutOfBounds(forwardPosition, data)) {
-            break;
+        if (isOutOfBounds(forwardPosition, mapCopy)) {
+            return false;
         }
 
-        if (isBlocked(data[forwardPosition.x][forwardPosition.y])) {
+        if (isBlocked(mapCopy[forwardPosition.x][forwardPosition.y])) {
             direction = turnRight(direction);
             continue;
         }
 
         currentPosition = forwardPosition;
-        visitedPositions.add(`${currentPosition.x},${currentPosition.y}`);
+    }
+}
+
+export function calculateInfiniteLoopCount(data: string[][]): number {
+    const initialGuardPosition = findGuard(data);
+    if (!initialGuardPosition) {
+        throw new Error("Guard's initial position not found.");
     }
 
-    return visitedPositions.size;
+    let loopCount = 0;
+
+    for (let x = 0; x < data.length; x++) {
+        for (let y = 0; y < data[x].length; y++) {
+            if (x === initialGuardPosition.x && y === initialGuardPosition.y) continue;
+
+            if (isBlocked(data[x][y])) continue;
+
+            // Architecture never ending staircase
+            const EscherStaircase = simulateWithExtraObstacle(data, { x, y }, initialGuardPosition);
+            if (EscherStaircase) {
+                loopCount++;
+            }
+        }
+    }
+
+    return loopCount;
 }
